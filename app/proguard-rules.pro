@@ -27,7 +27,6 @@
 -keep class okhttp3.** { *; }
 -keep class coil.** { *; }
 -keep class io.noties.markwon.** { *; }
--keep class com.arthenica.ffmpegkit.** { *; }
 
 # Keep Room
 -keep class * extends androidx.room.RoomDatabase

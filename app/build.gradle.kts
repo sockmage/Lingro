@@ -47,6 +47,10 @@ android {
                 "proguard-rules.pro"
             )
         }
+        debug {
+            isMinifyEnabled = false
+            isShrinkResources = false
+        }
     }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
@@ -78,6 +82,10 @@ android {
     packaging {
         jniLibs {
             useLegacyPackaging = true
+        }
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+            pickFirsts += "META-INF/gradle/incremental.annotation.processors"
         }
     }
 }
@@ -127,9 +135,6 @@ dependencies {
     
     // Image loading
     implementation(libs.coil.compose)
-    
-    // Audio/Video processing
-    implementation(":mobile-ffmpeg-full-gpl-4.4.LTS@aar")
     
     // Room database
     implementation(libs.androidx.room.runtime)
