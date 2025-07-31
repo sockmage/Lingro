@@ -84,7 +84,7 @@ fun ChatMessage(
         val date = Date(message.timestamp)
         SimpleDateFormat("HH:mm", Locale.getDefault()).format(date)
     }
-    val configuration = LocalConfiguration.current
+    // (удалена переменная configuration)
     val userBubbleColor = MaterialTheme.colorScheme.primaryContainer
     val assistantBubbleColor = MaterialTheme.colorScheme.surfaceVariant
     val userShape: Shape = RoundedCornerShape(topStart = 20.dp, topEnd = 4.dp, bottomEnd = 20.dp, bottomStart = 20.dp)
