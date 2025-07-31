@@ -62,8 +62,8 @@ class ChatViewModel @Inject constructor(
                         .replaceFirst("создай изображение", "", ignoreCase = true)
                         .trim()
                     
-                    // Log the extracted prompt
-                    Log.d("ChatViewModel", "Generated image prompt: '$prompt'")
+                    // Для production можно отключить логи ниже
+                    // Log.d("ChatViewModel", "Generated image prompt: '$prompt'")
 
                     if (prompt.isNotBlank()) {
                         generatedImageUrl = chatRepository.generateImage(prompt)

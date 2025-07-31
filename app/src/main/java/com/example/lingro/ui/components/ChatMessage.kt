@@ -63,6 +63,8 @@ import androidx.compose.ui.unit.IntOffset
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.offset
 import androidx.compose.animation.core.tween
+import android.content.Intent
+import android.widget.Toast
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

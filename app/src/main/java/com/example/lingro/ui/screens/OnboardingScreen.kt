@@ -54,7 +54,7 @@ fun OnboardingScreen(
     )
     var selectedLanguage by remember { mutableStateOf(languageList.first().first) }
     var selectedTheme by remember { mutableStateOf(initialTheme ?: "SYSTEM") }
-    var selectedVoice by remember { mutableStateOf(ttsManager.availableVoices.first()) }
+    var selectedVoice by remember { mutableStateOf(ttsManager.availableVoices.firstOrNull() ?: "alloy") }
     var isSaving by remember { mutableStateOf(false) }
     var isPlaying by remember { mutableStateOf(false) }
     var isLoading by remember { mutableStateOf(false) }

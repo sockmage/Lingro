@@ -52,7 +52,7 @@ fun MainScreen(
     var showAboutDialog by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val ttsManager = remember { TTSManager(context) }
-    var selectedVoice by remember { mutableStateOf<String>(ttsManager.availableVoices.first()) }
+    var selectedVoice by remember { mutableStateOf<String>(ttsManager.availableVoices.firstOrNull() ?: "alloy") }
     val scope = rememberCoroutineScope()
 
     val chatViewModel: ChatViewModel = hiltViewModel()

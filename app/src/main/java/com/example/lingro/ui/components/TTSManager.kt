@@ -47,7 +47,8 @@ class TTSManager(private val context: Context) {
                 withContext(Dispatchers.Main) { onLoadingStart.invoke() }
                 val url = URL("https://lingro-proxy-production.up.railway.app/tts")
                 val postData = "{\"input\":\"${text.replace("\"", "\\\"") }\",\"voice\":\"$useVoice\"}"
-                Log.d("TTSManager", "Запрос к $url с голосом $useVoice и текстом: $text")
+                // Для production можно отключить логи ниже
+                // Log.d("TTSManager", "Запрос к $url с голосом $useVoice и текстом: $text")
                 val conn = url.openConnection() as HttpURLConnection
                 conn.requestMethod = "POST"
                 conn.setRequestProperty("Content-Type", "application/json")
@@ -65,7 +66,7 @@ class TTSManager(private val context: Context) {
                         playAudio(tempFile)
                     }
                     lastFile = tempFile
-                    Log.d("TTSManager", "Успешно получили и воспроизводим mp3")
+                    // Log.d("TTSManager", "Успешно получили и воспроизводим mp3")
                 } else {
                     Log.e("TTSManager", "Ошибка HTTP: ${conn.responseCode}")
                     withContext(Dispatchers.Main) {
