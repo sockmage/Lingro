@@ -40,6 +40,8 @@ import androidx.compose.material.icons.outlined.People
 import kotlinx.coroutines.launch
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.material.icons.outlined.ColorLens
+import androidx.compose.ui.res.stringResource
+import com.example.lingro.R
 
 @Composable
 fun SettingCard(
@@ -378,31 +380,51 @@ fun SettingsScreen(
             }
         )
     }
+    var selectedLanguage by remember { mutableStateOf("ru") } // Default to Russian
+    
+    // Language selection dialog
     if (showLanguageDialog) {
         AlertDialog(
             onDismissRequest = { showLanguageDialog = false },
-            title = { Text("Выберите язык озвучивания") },
+            title = { Text(stringResource(R.string.settings_language)) },
             text = {
                 Column {
-                    languageList.forEach { (code, name) ->
-                        ListItem(
-                            headlineContent = { Text(name) },
-                            leadingContent = {
-                                RadioButton(
-                                    selected = selectedLanguage == code,
-                                    onClick = { onLanguageSelected(code); showLanguageDialog = false }
-                                )
-                            },
-                            modifier = Modifier
-                                .fillMaxWidth()
-                                .clickable { onLanguageSelected(code); showLanguageDialog = false }
+                    Text(
+                        text = stringResource(R.string.settings_language_coming_soon),
+                        style = MaterialTheme.typography.bodyMedium,
+                        color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.7f)
+                    )
+                    Spacer(modifier = Modifier.height(16.dp))
+                    
+                    // Language options
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(stringResource(R.string.settings_language_russian))
+                        RadioButton(
+                            selected = selectedLanguage == "ru",
+                            onClick = { selectedLanguage = "ru" }
+                        )
+                    }
+                    
+                    Row(
+                        modifier = Modifier.fillMaxWidth(),
+                        horizontalArrangement = Arrangement.SpaceBetween,
+                        verticalAlignment = Alignment.CenterVertically
+                    ) {
+                        Text(stringResource(R.string.settings_language_english))
+                        RadioButton(
+                            selected = selectedLanguage == "en",
+                            onClick = { selectedLanguage = "en" }
                         )
                     }
                 }
             },
             confirmButton = {
                 TextButton(onClick = { showLanguageDialog = false }) {
-                    Text("Закрыть")
+                    Text(stringResource(R.string.settings_clear_history_confirm_negative))
                 }
             }
         )

@@ -39,8 +39,31 @@ import com.example.lingro.ui.components.VoicePreferences
 import com.example.lingro.ui.components.TTSManager
 import kotlinx.coroutines.launch
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.runtime.DisposableEffect
 
 
+/**
+ * Main screen of the Lingro application.
+ * 
+ * This screen serves as the primary interface for the chat application,
+ * providing navigation to different features and managing the overall
+ * application state. It includes:
+ * - Chat interface with AI assistant
+ * - Settings and configuration options
+ * - Theme management (light/dark/system)
+ * - Voice selection for TTS
+ * - Role selection for AI assistant
+ * 
+ * The screen uses Material 3 design principles and follows the
+ * single activity pattern with Compose navigation.
+ * 
+ * @param themeMode Current theme mode (LIGHT, DARK, SYSTEM)
+ * @param onThemeModeChange Callback for theme mode changes
+ * 
+ * @see com.example.lingro.ui.screens.chat.ChatScreen
+ * @see com.example.lingro.ui.screens.SettingsScreen
+ * @see com.example.lingro.ui.screens.role.RoleSelectionScreen
+ */
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalAnimationApi::class)
 @Composable
 fun MainScreen(
@@ -52,6 +75,11 @@ fun MainScreen(
     var showAboutDialog by remember { mutableStateOf(false) }
     val context = LocalContext.current
     val ttsManager = remember { TTSManager(context) }
+    DisposableEffect(Unit) {
+        onDispose {
+            ttsManager.stop()
+        }
+    }
     var selectedVoice by remember { mutableStateOf<String>(ttsManager.availableVoices.firstOrNull() ?: "alloy") }
     val scope = rememberCoroutineScope()
 

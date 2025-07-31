@@ -14,7 +14,23 @@ import androidx.compose.runtime.remember
 import android.media.AudioAttributes
 import java.io.FileOutputStream
 
-// Make TTSManager a class that takes Context in constructor
+/**
+ * Text-to-Speech manager for Lingro application.
+ * 
+ * This class handles text-to-speech functionality using OpenAI's TTS API
+ * through a proxy server. It manages voice selection, audio playback,
+ * and resource cleanup to prevent memory leaks.
+ * 
+ * Features:
+ * - Multiple voice options (alloy, echo, fable, onyx, nova, shimmer, ash, sage, coral)
+ * - Asynchronous audio processing
+ * - Automatic resource cleanup
+ * - Error handling and fallback
+ * 
+ * @param context The application context for file operations and MediaPlayer
+ * 
+ * @see com.example.lingro.ui.components.VoicePreferences
+ */
 class TTSManager(private val context: Context) {
 
     private var mediaPlayer: MediaPlayer? = null
@@ -23,14 +39,38 @@ class TTSManager(private val context: Context) {
     private var isSpeaking by mutableStateOf(false)
     private var lastFile: File? = null
 
+    /**
+     * List of available TTS voices.
+     * 
+     * These voices are provided by OpenAI's TTS API and offer different
+     * characteristics and styles for text-to-speech conversion.
+     */
     val availableVoices = listOf("alloy", "echo", "fable", "onyx", "nova", "shimmer", "ash", "sage", "coral")
 
+    /**
+     * Sets the current voice for TTS.
+     * 
+     * @param voice The voice name to use. Must be one of [availableVoices].
+     */
     fun setVoice(voice: String) {
         if (availableVoices.contains(voice)) {
             currentVoice = voice
         }
     }
 
+    /**
+     * Converts text to speech and plays it asynchronously.
+     * 
+     * This method sends the text to the TTS proxy server, downloads the audio file,
+     * and plays it using MediaPlayer. The process is fully asynchronous and includes
+     * proper error handling and resource management.
+     * 
+     * @param text The text to convert to speech
+     * @param voice The voice to use for speech synthesis
+     * @param onDone Callback called when speech finishes or fails
+     * @param onLoadingStart Callback called when loading starts
+     * @param onLoadingEnd Callback called when loading ends
+     */
     suspend fun speak(
         text: String,
         voice: String,
@@ -84,6 +124,11 @@ class TTSManager(private val context: Context) {
         }
     }
 
+    /**
+     * Plays audio from a file using MediaPlayer.
+     * 
+     * @param file The audio file to play
+     */
     private fun playAudio(file: File) {
         stop()
         mediaPlayer = MediaPlayer().apply {
@@ -102,6 +147,13 @@ class TTSManager(private val context: Context) {
         }
     }
 
+    /**
+     * Stops current audio playback and cleans up resources.
+     * 
+     * This method should be called when the TTSManager is no longer needed
+     * to prevent memory leaks. It stops MediaPlayer, releases resources,
+     * and deletes temporary audio files.
+     */
     fun stop() {
         mediaPlayer?.stop()
         mediaPlayer?.release()

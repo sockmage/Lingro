@@ -65,6 +65,10 @@ import androidx.compose.foundation.layout.offset
 import androidx.compose.animation.core.tween
 import android.content.Intent
 import android.widget.Toast
+import com.example.lingro.ui.components.ShareUtils
+import androidx.compose.material.icons.outlined.Share
+import androidx.compose.ui.res.stringResource
+import com.example.lingro.R
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
@@ -73,8 +77,11 @@ fun ChatMessage(
     onSpeak: (Message) -> Unit = {},
     isSpeaking: Boolean = false,
     isTtsLoading: Boolean = false,
-    onStopSpeak: () -> Unit = {}
+    onStopSpeak: () -> Unit = {},
+    modifier: Modifier = Modifier
 ) {
+    val context = LocalContext.current
+    val shareUtils = remember { ShareUtils(context) }
     val clipboardManager = LocalClipboardManager.current
     var showCopied by remember { mutableStateOf(false) }
     val snackbarHostState = remember { SnackbarHostState() }
@@ -173,22 +180,38 @@ fun ChatMessage(
                         )
                     }
                 } else {
-                    IconButton(
-                        onClick = {
-                            clipboardManager.setText(AnnotatedString(message.content))
-                            showCopied = true
-                            coroutineScope.launch {
-                                snackbarHostState.showSnackbar("Скопировано!")
-                            }
-                        },
-                        modifier = Modifier.size(20.dp).alpha(0.5f)
+                    Row(
+                        horizontalArrangement = Arrangement.spacedBy(4.dp)
                     ) {
-                        Icon(
-                            imageVector = Icons.Outlined.ContentCopy,
-                            contentDescription = "Копировать",
-                            tint = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
-                            modifier = Modifier.size(14.dp)
-                        )
+                        IconButton(
+                            onClick = {
+                                clipboardManager.setText(AnnotatedString(message.content))
+                                showCopied = true
+                                coroutineScope.launch {
+                                    snackbarHostState.showSnackbar("Скопировано!")
+                                }
+                            },
+                            modifier = Modifier.size(20.dp).alpha(0.5f)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.ContentCopy,
+                                contentDescription = "Копировать",
+                                tint = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
+                                modifier = Modifier.size(14.dp)
+                            )
+                        }
+                        
+                        IconButton(
+                            onClick = { shareUtils.shareMessage(message) },
+                            modifier = Modifier.size(20.dp).alpha(0.5f)
+                        ) {
+                            Icon(
+                                imageVector = Icons.Outlined.Share,
+                                contentDescription = stringResource(R.string.chat_share_message),
+                                tint = MaterialTheme.colorScheme.outline.copy(alpha = 0.4f),
+                                modifier = Modifier.size(14.dp)
+                            )
+                        }
                     }
                 }
             }

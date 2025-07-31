@@ -1,3 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Lingro</string>
+    
+    <!-- Navigation -->
+    <string name="nav_chat">Чат</string>
+    <string name="nav_settings">Настройки</string>
+    
+    <!-- Chat -->
+    <string name="chat_input_hint">Введите сообщение...</string>
+    <string name="chat_send">Отправить</string>
+    <string name="chat_typing">ИИ печатает...</string>
+    <string name="chat_attachment">Вложение</string>
+    <string name="chat_image_search">Поиск изображений</string>
+    <string name="chat_pdf_upload">Загрузить PDF</string>
+    <string name="chat_voice_play">Воспроизвести голос</string>
+    <string name="chat_voice_stop">Остановить голос</string>
+    <string name="chat_copy_message">Копировать сообщение</string>
+    <string name="chat_message_copied">Сообщение скопировано</string>
+    <string name="chat_share_message">Поделиться сообщением</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Настройки</string>
+    <string name="settings_theme">Тема</string>
+    <string name="settings_theme_light">Светлая</string>
+    <string name="settings_theme_dark">Тёмная</string>
+    <string name="settings_theme_system">Системная</string>
+    <string name="settings_voice">Голос</string>
+    <string name="settings_language">Язык</string>
+    <string name="settings_language_russian">Русский</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_coming_soon">Другие языки появятся позже</string>
+    <string name="settings_clear_history">Очистить историю</string>
+    <string name="settings_clear_history_confirm">Очистить всю историю чатов?</string>
+    <string name="settings_clear_history_confirm_positive">Очистить</string>
+    <string name="settings_clear_history_confirm_negative">Отмена</string>
+    <string name="settings_about">О приложении</string>
+    <string name="settings_about_description">Lingro - современный AI-ассистент для Android</string>
+    
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Добро пожаловать в Lingro</string>
+    <string name="onboarding_welcome_subtitle">Ваш персональный AI-ассистент</string>
+    <string name="onboarding_theme_title">Выберите тему</string>
+    <string name="onboarding_theme_subtitle">Вы можете изменить её позже в настройках</string>
+    <string name="onboarding_voice_title">Выберите голос</string>
+    <string name="onboarding_voice_subtitle">Голос для озвучивания ответов ИИ</string>
+    <string name="onboarding_language_title">Выберите язык</string>
+    <string name="onboarding_language_subtitle">Язык интерфейса приложения</string>
+    <string name="onboarding_finish">Начать</string>
+    <string name="onboarding_next">Далее</string>
+    <string name="onboarding_back">Назад</string>
+    
+    <!-- Roles -->
+    <string name="role_selection_title">Выберите роль ассистента</string>
+    <string name="role_general">Общий ассистент</string>
+    <string name="role_programmer">Программист</string>
+    <string name="role_writer">Писатель</string>
+    <string name="role_teacher">Учитель</string>
+    <string name="role_creative">Креативный помощник</string>
+    
+    <!-- Errors -->
+    <string name="error_network">Ошибка сети</string>
+    <string name="error_unknown">Неизвестная ошибка</string>
+    <string name="error_file_not_found">Файл не найден</string>
+    <string name="error_invalid_file">Неподдерживаемый формат файла</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_app_logo">Логотип приложения Lingro</string>
+    <string name="accessibility_send_button">Кнопка отправки сообщения</string>
+    <string name="accessibility_voice_button">Кнопка воспроизведения голоса</string>
+    <string name="accessibility_settings_button">Кнопка настроек</string>
+    <string name="accessibility_back_button">Кнопка назад</string>
+    
+    <!-- Splash Screen -->
+    <string name="splash_app_name">Lingro</string>
+    <string name="splash_app_subtitle">AI Assistant</string>
+    <string name="splash_loading">Загрузка...</string>
 </resources>

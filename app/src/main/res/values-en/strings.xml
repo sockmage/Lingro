@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Lingro</string>
+    
+    <!-- Navigation -->
+    <string name="nav_chat">Chat</string>
+    <string name="nav_settings">Settings</string>
+    
+    <!-- Chat -->
+    <string name="chat_input_hint">Type a message...</string>
+    <string name="chat_send">Send</string>
+    <string name="chat_typing">AI is typing...</string>
+    <string name="chat_attachment">Attachment</string>
+    <string name="chat_image_search">Search images</string>
+    <string name="chat_pdf_upload">Upload PDF</string>
+    <string name="chat_voice_play">Play voice</string>
+    <string name="chat_voice_stop">Stop voice</string>
+    <string name="chat_copy_message">Copy message</string>
+    <string name="chat_message_copied">Message copied</string>
+    <string name="chat_share_message">Share message</string>
+    
+    <!-- Settings -->
+    <string name="settings_title">Settings</string>
+    <string name="settings_theme">Theme</string>
+    <string name="settings_theme_light">Light</string>
+    <string name="settings_theme_dark">Dark</string>
+    <string name="settings_theme_system">System</string>
+    <string name="settings_voice">Voice</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_language_russian">Русский</string>
+    <string name="settings_language_english">English</string>
+    <string name="settings_language_coming_soon">Other languages coming soon</string>
+    <string name="settings_clear_history">Clear history</string>
+    <string name="settings_clear_history_confirm">Clear all chat history?</string>
+    <string name="settings_clear_history_confirm_positive">Clear</string>
+    <string name="settings_clear_history_confirm_negative">Cancel</string>
+    <string name="settings_about">About</string>
+    <string name="settings_about_description">Lingro - modern AI assistant for Android</string>
+    
+    <!-- Onboarding -->
+    <string name="onboarding_welcome">Welcome to Lingro</string>
+    <string name="onboarding_welcome_subtitle">Your personal AI assistant</string>
+    <string name="onboarding_theme_title">Choose theme</string>
+    <string name="onboarding_theme_subtitle">You can change it later in settings</string>
+    <string name="onboarding_voice_title">Choose voice</string>
+    <string name="onboarding_voice_subtitle">Voice for AI response narration</string>
+    <string name="onboarding_language_title">Choose language</string>
+    <string name="onboarding_language_subtitle">App interface language</string>
+    <string name="onboarding_finish">Start</string>
+    <string name="onboarding_next">Next</string>
+    <string name="onboarding_back">Back</string>
+    
+    <!-- Roles -->
+    <string name="role_selection_title">Choose assistant role</string>
+    <string name="role_general">General assistant</string>
+    <string name="role_programmer">Programmer</string>
+    <string name="role_writer">Writer</string>
+    <string name="role_teacher">Teacher</string>
+    <string name="role_creative">Creative helper</string>
+    
+    <!-- Errors -->
+    <string name="error_network">Network error</string>
+    <string name="error_unknown">Unknown error</string>
+    <string name="error_file_not_found">File not found</string>
+    <string name="error_invalid_file">Unsupported file format</string>
+    
+    <!-- Accessibility -->
+    <string name="accessibility_app_logo">Lingro app logo</string>
+    <string name="accessibility_send_button">Send message button</string>
+    <string name="accessibility_voice_button">Voice play button</string>
+    <string name="accessibility_settings_button">Settings button</string>
+    <string name="accessibility_back_button">Back button</string>
+    
+    <!-- Splash Screen -->
+    <string name="splash_app_name">Lingro</string>
+    <string name="splash_app_subtitle">AI Assistant</string>
+    <string name="splash_loading">Loading...</string>
+</resources> 

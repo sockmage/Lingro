@@ -34,6 +34,8 @@ import androidx.compose.animation.fadeOut
 import androidx.compose.animation.scaleIn
 import androidx.compose.animation.scaleOut
 import androidx.compose.animation.togetherWith
+import androidx.compose.runtime.DisposableEffect
+import com.example.lingro.ui.screens.SplashScreen
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -41,9 +43,15 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val context = LocalContext.current
+            var showSplash by rememberSaveable { mutableStateOf(true) }
             var showOnboarding by rememberSaveable { mutableStateOf(false) }
             var themeMode by rememberSaveable { mutableStateOf(ThemeMode.SYSTEM) }
             val ttsManager = remember { TTSManager(context) }
+            DisposableEffect(Unit) {
+                onDispose {
+                    ttsManager.stop()
+                }
+            }
             var onboardingTheme by rememberSaveable { mutableStateOf(themeMode.name) }
             LaunchedEffect(Unit) {
                 runBlocking {
@@ -64,35 +72,43 @@ class MainActivity : ComponentActivity() {
                     ThemeMode.SYSTEM -> isSystemInDarkTheme()
                 }
             ) {
-                AnimatedContent(
-                    targetState = showOnboarding,
-                    transitionSpec = {
-                        scaleIn(initialScale = 0.96f) + fadeIn() togetherWith scaleOut(targetScale = 1.04f) + fadeOut()
-                    }
-                ) { onboarding ->
-                    if (onboarding) {
-                        OnboardingScreen(
-                            onFinish = {
-                                showOnboarding = false
-                                themeMode = ThemeMode.valueOf(onboardingTheme)
-                            },
-                            ttsManager = ttsManager,
-                            initialTheme = themeMode.name,
-                            onThemeSelected = { code ->
-                                onboardingTheme = code
-                                themeMode = ThemeMode.valueOf(code)
-                            }
-                        )
-                    } else {
-                        MainScreen(
-                            themeMode = themeMode,
-                            onThemeModeChange = { newMode ->
-                                themeMode = newMode
-                                runBlocking {
-                                    VoicePreferences.saveTheme(context, newMode.name)
+                if (showSplash) {
+                    SplashScreen(
+                        onSplashFinished = {
+                            showSplash = false
+                        }
+                    )
+                } else {
+                    AnimatedContent(
+                        targetState = showOnboarding,
+                        transitionSpec = {
+                            scaleIn(initialScale = 0.96f) + fadeIn() togetherWith scaleOut(targetScale = 1.04f) + fadeOut()
+                        }
+                    ) { onboarding ->
+                        if (onboarding) {
+                            OnboardingScreen(
+                                onFinish = {
+                                    showOnboarding = false
+                                    themeMode = ThemeMode.valueOf(onboardingTheme)
+                                },
+                                ttsManager = ttsManager,
+                                initialTheme = themeMode.name,
+                                onThemeSelected = { code ->
+                                    onboardingTheme = code
+                                    themeMode = ThemeMode.valueOf(code)
                                 }
-                            }
-                        )
+                            )
+                        } else {
+                            MainScreen(
+                                themeMode = themeMode,
+                                onThemeModeChange = { newMode ->
+                                    themeMode = newMode
+                                    runBlocking {
+                                        VoicePreferences.saveTheme(context, newMode.name)
+                                    }
+                                }
+                            )
+                        }
                     }
                 }
             }
