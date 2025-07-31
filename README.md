@@ -1,61 +1,101 @@
 # Lingro
+
 ![Gradle](https://img.shields.io/badge/Gradle-app?style=flat&logo=Gradle&logoColor=%23000000&labelColor=%23babeff&color=%23000000)
 ![Android](https://img.shields.io/badge/Android-app?style=flat&logo=Android&logoColor=%23000000&labelColor=%233DDC84&color=%23000000)
 ![GoogleFonts](https://img.shields.io/badge/Google%20Fonts-app?style=flat&logo=Google%20Fonts&color=%23000000)
 ![AndroidStudio](https://img.shields.io/badge/Android%20Studio-app?style=flat&logo=Android%20Studio&labelColor=%23000000&color=%23000000)
 ![JetpackCompose](https://img.shields.io/badge/Jetpack%20Compose-app?style=flat&logo=Jetpack%20Compose&labelColor=%23000000&color=%23000000)
 
-Android-приложение для общения с ИИ-ассистентом на базе OpenAI GPT, с поддержкой поиска и отправки изображений, а также работы с PDF и Vision.
+**Lingro** — современное Android-приложение для общения с ИИ-ассистентом на базе OpenAI GPT, с поддержкой поиска и отправки изображений, а также работы с PDF и Vision API. Этот репозиторий можно использовать как пример или основу для создания собственных чат-ботов и ассистентов на Android.
+
+---
 
 ## Особенности
 
 - Современный дизайн на базе Material 3 (Jetpack Compose)
-  - Используются Material Icons и кастомный шрифт [Rubik](https://fonts.google.com/specimen/Rubik)
-  - Поддержка светлой и тёмной темы
-- Общение с ChatGPT через собственный прокси (обход региональных ограничений — приложение работает в любой стране)
+  - Кастомный шрифт [Rubik](https://fonts.google.com/specimen/Rubik)
+  - Светлая и тёмная тема
+- Общение с ChatGPT через собственный прокси (обход региональных ограничений)
 - Поиск и отправка изображений через DuckDuckGo (через отдельный Python-прокси)
 - Отправка PDF-файлов для анализа через Vision API
 - Поддержка вложений, история чатов
-- Приложение — Android-ответвление проекта [tggpt (Telegram-бот)](https://github.com/mxlskh/tggpt): общий backend, разные клиенты
+- Гибкая архитектура: легко расширять и модифицировать
+- Пример интеграции TTS (Text-to-Speech) и выбора голоса
+- Приложение — Android-ответвление проекта [tggpt (Telegram-бот)](https://github.com/mxlskh/tggpt)
 
 ## Архитектура
 
-- Все текстовые и PDF-запросы идут через [Lingro-Proxy (Node.js)](https://lingro-proxy-production.up.railway.app/)
+- Все текстовые и PDF-запросы идут через [Lingro-Proxy (Node.js)](https://github.com/sockmage/Lingro-Proxy)
 - Поиск изображений — через [DuckDuckGo Image API for Lingro (Python FastAPI)](https://github.com/sockmage/DDG-Image-API-for-Lingro)
 - Приложение не хранит ключи OpenAI/Unsplash и не зависит от региона пользователя
 
-## Backend
+## Быстрый старт
 
-- [Lingro-Proxy (Node.js)](https://github.com/sockmage/Lingro-Proxy)
-- [DuckDuckGo Image API for Lingro (Python)](https://github.com/sockmage/DDG-Image-API-for-Lingro)
+### Требования
+- Android Studio (рекомендуется последняя версия)
+- JDK 17+
+- Android SDK (API 24+)
+- Интернет-соединение
 
-## Деплой backend-сервисов на Railway
+### Сборка и запуск
+1. Клонируйте репозиторий:
+   ```sh
+   git clone https://github.com/yourusername/Lingro.git
+   cd Lingro
+   ```
+2. Откройте проект в Android Studio.
+3. Дождитесь синхронизации Gradle (автоматически подтянутся все зависимости).
+4. Соберите и запустите проект на эмуляторе или устройстве.
 
-### Lingro_Proxy
-1. Зайдите на [Railway](https://railway.app/), создайте новый проект.
-2. Подключите репозиторий с [Lingro-Proxy](https://github.com/sockmage/Lingro-Proxy).
-3. В настройках проекта добавьте переменную окружения `OPENAI_API_KEY`.
-4. Запустите деплой — Railway сам соберёт и запустит сервер.
+### Настройка backend
+Для полноценной работы приложения необходимы backend-сервисы:
+- [Lingro-Proxy (Node.js)](https://github.com/sockmage/Lingro-Proxy) — прокси для OpenAI и Vision API
+- [DuckDuckGo Image API for Lingro (Python)](https://github.com/sockmage/DDG-Image-API-for-Lingro) — поиск изображений
 
-### DuckDuckGo Image API for Lingro
-1. Создайте новый проект на Railway.
-2. Подключите репозиторий с [DuckDuckGo Image API for Lingro](https://github.com/sockmage/DDG-Image-API-for-Lingro).
-3. Railway автоматически определит Python и запустит сервис.
+#### Пример деплоя на Railway
+1. Зарегистрируйтесь на [Railway](https://railway.app/).
+2. Создайте проект и подключите нужный репозиторий (см. ссылки выше).
+3. Для Lingro-Proxy добавьте переменную окружения `OPENAI_API_KEY`.
+4. Запустите деплой — Railway сам соберёт и запустит сервисы.
 
-## Инструменты и сборка
+## Использование
+- После запуска приложения пройдите onboarding (выбор темы, настройка голоса).
+- Основной экран — чат с ИИ (ChatGPT), поддержка вложений, изображений, PDF.
+- Можно выбрать роль ассистента, голос для TTS, переключать темы.
+- Все сетевые запросы идут через ваши backend-сервисы (см. выше).
 
-- Проект собирается с помощью [Gradle](https://gradle.org/) — это современная система сборки для Android.
-- Для разработки использовалась [Android Studio](https://developer.android.com/studio) — официальная среда для Android.
-- Интерфейс реализован на [Jetpack Compose](https://developer.android.com/jetpack/compose) — декларативном UI-фреймворке от Google.
-- Для внедрения зависимостей используется [Hilt (Dagger)](https://dagger.dev/hilt/).
-- Работа с сетью — через [Retrofit](https://square.github.io/retrofit/) и [OkHttp](https://square.github.io/okhttp/).
-- Для загрузки изображений — [Coil](https://coil-kt.github.io/coil/).
-- Для поддержки markdown — библиотека [Markwon](https://noties.io/Markwon/).
-- Используются Material Icons и кастомный шрифт [Rubik](https://fonts.google.com/specimen/Rubik).
+## Технологии
+- [Jetpack Compose](https://developer.android.com/jetpack/compose) — UI
+- [Hilt (Dagger)](https://dagger.dev/hilt/) — DI
+- [Retrofit](https://square.github.io/retrofit/) и [OkHttp](https://square.github.io/okhttp/) — сеть
+- [Coil](https://coil-kt.github.io/coil/) — загрузка изображений
+- [Markwon](https://noties.io/Markwon/) — markdown
+- Material Icons, кастомный шрифт Rubik
 
-## License
+## Лицензия
 
-All rights reserved.
+Этот проект распространяется по лицензии MIT. Вы можете свободно использовать, копировать, изменять и распространять этот код с указанием авторства.
 
-This code is provided for viewing purposes only.
-Any use, copying, modification, or distribution is strictly prohibited without explicit permission from the author.
+```
+MIT License
+
+Copyright (c) 2024 YOUR_NAME
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+ to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
